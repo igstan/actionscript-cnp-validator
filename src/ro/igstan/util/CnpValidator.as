@@ -15,9 +15,21 @@ package ro.igstan.util
         protected static const NOVEMBER:int  = 11;
         protected static const DECEMBER:int  = 12;
         
-        protected static const MONTHS_WITH_31_DAYS:Array = [
-            JANUARY, MARCH, MAY, JULY, AUGUST, OCTOBER, DECEMBER
-        ];
+        protected static const DAYS_IN_MONTH:Object = {};
+        
+        {
+            DAYS_IN_MONTH[JANUARY]   = 31;
+            DAYS_IN_MONTH[MARCH]     = 31;
+            DAYS_IN_MONTH[APRIL]     = 30;
+            DAYS_IN_MONTH[MAY]       = 31;
+            DAYS_IN_MONTH[JUNE]      = 30;
+            DAYS_IN_MONTH[JULY]      = 31;
+            DAYS_IN_MONTH[AUGUST]    = 31;
+            DAYS_IN_MONTH[SEPTEMBER] = 30;
+            DAYS_IN_MONTH[OCTOBER]   = 31;
+            DAYS_IN_MONTH[NOVEMBER]  = 30;
+            DAYS_IN_MONTH[DECEMBER]  = 31;
+        };
         
         protected static const CONTROL_DIGIT_CHECKSUM:Array = [2,7,9,1,4,6,3,5,8,2,7,9];
         
@@ -117,12 +129,7 @@ package ro.igstan.util
         
         protected function regularMonthLengthInDays():int
         {
-            return birthMonthHas31Days() ? 31 : 30;
-        }
-        
-        protected function birthMonthHas31Days():Boolean
-        {
-            return MONTHS_WITH_31_DAYS.indexOf(birthMonth) !== -1;
+            return DAYS_IN_MONTH[birthMonth];
         }
         
         protected function get birthYear():int
