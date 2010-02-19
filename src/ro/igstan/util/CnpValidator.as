@@ -135,10 +135,10 @@ package ro.igstan.util
         
         protected function februaryLengthInDays():int
         {
-            return isLeapBirthYear() ? 29 : 28;
+            return hasLeapBirthYear() ? 29 : 28;
         }
         
-        protected function isLeapBirthYear():Boolean
+        protected function hasLeapBirthYear():Boolean
         {
             return  cnp.birthYear % 400 === 0
                 || (cnp.birthYear % 100 !== 0 && cnp.birthYear % 4 === 0);
