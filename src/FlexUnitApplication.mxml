@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml"
+                        xmlns:flexunit="flexunit.flexui.*"
+                        layout="absolute"
+                        creationComplete="runTests()">
+    <mx:Script>
+        <![CDATA[
+            import ro.igstan.util.test.CnpValidatorTest;
+
+            private var testSuite:Array = [
+                // add test cases here
+            ];
+
+            private function runTests():void
+            {
+                testRunner.runWithFlexUnit4Runner(testSuite, "FlexUtils");
+            }
+        ]]>
+    </mx:Script>
+    <flexunit:FlexUnitTestRunnerUI id="testRunner"/>
+</mx:WindowedApplication>
