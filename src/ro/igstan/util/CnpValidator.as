@@ -33,12 +33,12 @@ package ro.igstan.util
         
         protected static const CONTROL_DIGIT_CHECKSUM:Array = [2,7,9,1,4,6,3,5,8,2,7,9];
         
-        protected var cnp:String;
+        protected var cnp:CNP;
 
         
         public function validates(cnp:String):Boolean
         {
-            this.cnp = cnp;
+            this.cnp = new CNP(cnp);
             
             return hasThirteenDigits(cnp)
                 && hasValidBirthDate(cnp)
@@ -52,10 +52,7 @@ package ro.igstan.util
         
         protected function hasValidControlDigit():Boolean
         {
-            var controlDigit:int = extractControlDigit();
-            var computedControlDigit:int = calculateControlDigit();
-            
-            return computedControlDigit === controlDigit;
+            return cnp.controlDigit === calculateControlDigit();
         }
         
         protected function calculateControlDigit():int
@@ -72,16 +69,11 @@ package ro.igstan.util
             var i:int   = 0;
             
             while (i < 12) {
-                sum += CONTROL_DIGIT_CHECKSUM[i] * getCnpDigit(i);
+                sum += CONTROL_DIGIT_CHECKSUM[i] * cnp.digit(i);
                 i++;
             }
             
             return sum;
-        }
-        
-        protected function extractControlDigit():int
-        {
-            return getCnpDigit(12);
         }
         
         protected function hasValidBirthDate(cnp:String):Boolean
@@ -91,17 +83,17 @@ package ro.igstan.util
         
         protected function validYear():Boolean
         {
-            return birthYear > 0 && birthYear <= 99;
+            return cnp.birthYear > 0 && cnp.birthYear <= 99;
         }
         
         protected function validMonth():Boolean
         {
-            return birthMonth > 0 && birthMonth <= 12;
+            return cnp.birthMonth > 0 && cnp.birthMonth <= 12;
         }
         
         protected function validDay():Boolean
         {
-            return birthDay > 0 && birthDay <= monthLengthInDays();
+            return cnp.birthDay > 0 && cnp.birthDay <= monthLengthInDays();
         }
         
         protected function monthLengthInDays():int
@@ -113,7 +105,7 @@ package ro.igstan.util
         
         protected function birthMonthIsFebruary():Boolean
         {
-            return birthMonth === FEBRUARY;
+            return cnp.birthMonth === FEBRUARY;
         }
         
         protected function februaryLengthInDays():int
@@ -123,38 +115,53 @@ package ro.igstan.util
         
         protected function isLeapBirthYear():Boolean
         {
-            return  birthYear % 400 === 0
-                || (birthYear % 100 !== 0 && birthYear % 4 === 0);
+            return  cnp.birthYear % 400 === 0
+                || (cnp.birthYear % 100 !== 0 && cnp.birthYear % 4 === 0);
         }
         
         protected function regularMonthLengthInDays():int
         {
-            return DAYS_IN_MONTH[birthMonth];
+            return DAYS_IN_MONTH[cnp.birthMonth];
         }
-        
-        protected function get birthYear():int
-        {
-            return extractBirthDatePart(1, 3);
-        }
-        
-        protected function get birthMonth():int
-        {
-            return extractBirthDatePart(3, 5);
-        }
-        
-        protected function get birthDay():int
-        {
-            return extractBirthDatePart(5, 7);
-        }
-        
-        protected function extractBirthDatePart(start:int, end:int):int
-        {
-            return parseInt(cnp.substring(start, end), 10);
-        }
-        
-        protected function getCnpDigit(i:int):int
-        {
-            return parseInt(cnp.charAt(i), 10);
-        }
+    }
+}
+
+class CNP
+{
+    private var cnp:String;
+    
+    public function CNP(cnp:String)
+    {
+        this.cnp = cnp;
+    }
+    
+    public function digit(i:int):int
+    {
+        return parseInt(cnp.charAt(i), 10);
+    }
+    
+    public function get birthYear():int
+    {
+        return digit(1)*10 + digit(2);        
+    }
+    
+    public function get birthMonth():int
+    {
+        return digit(3)*10 + digit(4);        
+    }
+    
+    public function get birthDay():int
+    {
+        return digit(5)*10 + digit(6);        
+    }
+    
+    public function get controlDigit():int
+    {
+        return digit(12);
+    }
+    
+    public function toString():String
+    {
+        return cnp;
     }
 }
