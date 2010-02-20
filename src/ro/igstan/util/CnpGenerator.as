@@ -25,18 +25,48 @@
 
 package ro.igstan.util
 {
+    import mx.managers.ISystemManager;
+
+    [Mixin]
     public dynamic class CnpGenerator
     {
         private var isMale:Boolean = true;
         
         private var _year:String;
         
-        private var month:String;
+        private var _month:String;
+        
+        private static var months:Object = {
+            "january"   : "01",
+            "february"  : "02",
+            "march"     : "03",
+            "april"     : "04",
+            "may"       : "05",
+            "june"      : "06",
+            "july"      : "07",
+            "august"    : "08",
+            "september" : "09",
+            "october"   : "10",
+            "november"  : "11",
+            "december"  : "12"
+        };
         
         
+        public static function init(_:ISystemManager):void
+        {
+            for (var month:String in months) (function(month:String):void {
+                
+                prototype[month] = function():CnpGenerator {
+                    this._month = months[month];
+                    return this;
+                };
+                
+            })(month);
+        };
+
         public function generateCnp():String
         {
-            return (isMale ? "1" : "2") + year + month;
+            return (isMale ? "1" : "2") + year + _month;
         }
         
         public function male():CnpGenerator
@@ -54,12 +84,6 @@ package ro.igstan.util
         public function birthYear(year:int):CnpGenerator
         {
             _year = year.toFixed().substring(2, 4);
-            return this;
-        }
-        
-        public function february():CnpGenerator
-        {
-            this.month = "02";
             return this;
         }
         

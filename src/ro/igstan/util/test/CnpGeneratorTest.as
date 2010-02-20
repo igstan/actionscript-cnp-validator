@@ -67,5 +67,14 @@ package ro.igstan.util.test
             
             Assert.assertEquals("02", cnpGenerator.generateCnp().substring(3, 5));
         }
+        
+        [Test]
+        public function bornInMay():void
+        {
+            var cnpGenerator:CnpGenerator = new CnpGenerator();
+            cnpGenerator.may();
+            
+            Assert.assertEquals("05", cnpGenerator.generateCnp().substring(3, 5));
+        }
     }
 }
