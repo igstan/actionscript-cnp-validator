@@ -77,15 +77,15 @@ package ro.igstan.util
 
         public function generateCnp():String
         {
-            return genderDigit() + birthDate();
+            return renderGenderDigit() + renderBirthDate();
         }
         
-        protected function genderDigit():String
+        protected function renderGenderDigit():String
         {
             return isMale ? "1" : "2";
         }
         
-        protected function birthDate():String
+        protected function renderBirthDate():String
         {
             return renderYear() + renderMonth() + renderDay();
         }
