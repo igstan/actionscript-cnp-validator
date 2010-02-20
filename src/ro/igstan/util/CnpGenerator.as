@@ -228,17 +228,31 @@ package ro.igstan.util
             }
             
             if (userSuppliedMonth) {
-                var month:int = getMonth();
-                
-                if (month === FEBRUARY) {
-                    if (userSuppliedYear && !isLeapYear(getYear()) && day > 28) {
-                        throw new ArgumentError();
-                    } else if (day > 29) {
-                        throw new ArgumentError();
-                    }
-                } else if (day > DAYS_IN_MONTH[month]) {
-                    throw new ArgumentError();
+                checkMonthAndDayCompatibility(getMonth(), day);
+            }
+        }
+        
+        protected function checkMonthAndDayCompatibility(month:int, day:int):void
+        {
+            var dayMax:int = DAYS_IN_MONTH[month];
+            
+            if (month === FEBRUARY) {
+                if (userSuppliedYear && !isLeapYear(getYear())) {
+                    dayMax = 28;
+                } else {
+                    dayMax = 29;
                 }
+            }
+            
+            if (day > dayMax) {
+                throw new ArgumentError();
+            }
+        }
+        
+        protected function checkMonthValidity(month:int):void
+        {
+            if (userSuppliedDay) {
+                checkMonthAndDayCompatibility(month, getDay());
             }
         }
         
@@ -246,21 +260,6 @@ package ro.igstan.util
         {
             return  year % 400 === 0
                 || (year % 100 !== 0 && year % 4 === 0);
-        }
-        
-        protected function checkMonthValidity(month:int):void
-        {
-            var day:int = getDay();
-            
-            if (month === FEBRUARY && userSuppliedDay) {
-                if (userSuppliedYear && !isLeapYear(getYear()) && day > 28) {
-                    throw new ArgumentError();
-                } else if (day > 29) {
-                    throw new ArgumentError();
-                }
-            } else if (day > DAYS_IN_MONTH[month]) {
-                throw new ArgumentError();
-            }
         }
     }
 }
