@@ -134,6 +134,27 @@ package ro.igstan.util.test
         }
         
         [Test]
+        public function settingDayOn30DoesNotUsesFebruary():void
+        {
+            var firstCall:Boolean = true;
+            var randomMonthGenerator:Function = function():int {
+                if (firstCall) {
+                    firstCall = false;
+                    return 2;
+                } else {
+                    return 3;
+                }
+            };
+            
+            var cnpGenerator:CnpGenerator = new CnpGenerator({
+                monthGenerator: randomMonthGenerator
+            });
+            var cnp:String = cnpGenerator.day(30).generateCnp();
+            
+            Assert.assertEquals("03", cnp.substring(3, 5));
+        }
+        
+        [Test]
         public function settingDayOn29AndMonthOnFebruaryGeneratesLeapYear():void
         {
             var leapYear:int = 2008;
