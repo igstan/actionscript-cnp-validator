@@ -30,6 +30,35 @@ package ro.igstan.util
     [Mixin]
     public dynamic class CnpGenerator
     {
+        protected static const JANUARY:int   = 1;
+        protected static const FEBRUARY:int  = 2;
+        protected static const MARCH:int     = 3;
+        protected static const APRIL:int     = 4;
+        protected static const MAY:int       = 5;
+        protected static const JUNE:int      = 6;
+        protected static const JULY:int      = 7;
+        protected static const AUGUST:int    = 8;
+        protected static const SEPTEMBER:int = 9;
+        protected static const OCTOBER:int   = 10;
+        protected static const NOVEMBER:int  = 11;
+        protected static const DECEMBER:int  = 12;
+        
+        protected static const DAYS_IN_MONTH:Object = {};
+        
+        {
+            DAYS_IN_MONTH[ JANUARY ]   = 31;
+            DAYS_IN_MONTH[ MARCH ]     = 31;
+            DAYS_IN_MONTH[ APRIL ]     = 30;
+            DAYS_IN_MONTH[ MAY ]       = 31;
+            DAYS_IN_MONTH[ JUNE ]      = 30;
+            DAYS_IN_MONTH[ JULY ]      = 31;
+            DAYS_IN_MONTH[ AUGUST ]    = 31;
+            DAYS_IN_MONTH[ SEPTEMBER ] = 30;
+            DAYS_IN_MONTH[ OCTOBER ]   = 31;
+            DAYS_IN_MONTH[ NOVEMBER ]  = 30;
+            DAYS_IN_MONTH[ DECEMBER ]  = 31;
+        };
+        
         private var isMale:Boolean = true;
         
         private var userSuppliedYear:int;
@@ -84,7 +113,7 @@ package ro.igstan.util
                 return 1987;
             };
         }
-
+        
         public function generateCnp():String
         {
             return renderGenderDigit() + renderBirthDate();
@@ -114,7 +143,7 @@ package ro.igstan.util
         {
             var year:int = generateYear();
             
-            if (userSuppliedDay === 29 && getMonth() === 2) {
+            if (userSuppliedDay === 29 && getMonth() === FEBRUARY) {
                 while (! isLeapYear(year)) {
                     year = generateYear();
                 }
@@ -149,7 +178,7 @@ package ro.igstan.util
             var month:int = generateMonth();
             
             if (getDay() > 29) {
-                while (month === 2) {
+                while (month === FEBRUARY) {
                     month = generateMonth();
                 }
             }
@@ -198,10 +227,16 @@ package ro.igstan.util
                 throw new ArgumentError();
             }
             
-            if (userSuppliedMonth && getMonth() === 2) {
-                if (userSuppliedYear && !isLeapYear(getYear()) && day > 28) {
-                    throw new ArgumentError();
-                } else if (day > 29) {
+            if (userSuppliedMonth) {
+                var month:int = getMonth();
+                
+                if (month === FEBRUARY) {
+                    if (userSuppliedYear && !isLeapYear(getYear()) && day > 28) {
+                        throw new ArgumentError();
+                    } else if (day > 29) {
+                        throw new ArgumentError();
+                    }
+                } else if (day > DAYS_IN_MONTH[month]) {
                     throw new ArgumentError();
                 }
             }
@@ -217,12 +252,14 @@ package ro.igstan.util
         {
             var day:int = getDay();
             
-            if (month === 2 && userSuppliedDay) {
+            if (month === FEBRUARY && userSuppliedDay) {
                 if (userSuppliedYear && !isLeapYear(getYear()) && day > 28) {
                     throw new ArgumentError();
                 } else if (day > 29) {
                     throw new ArgumentError();
                 }
+            } else if (day > DAYS_IN_MONTH[month]) {
+                throw new ArgumentError();
             }
         }
     }

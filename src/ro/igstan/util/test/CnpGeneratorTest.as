@@ -124,6 +124,18 @@ package ro.igstan.util.test
             cnpGenerator.year(2009).day(29).february();
         }
         
+        [Test(expects="ArgumentError")]
+        public function bornOn31stInAMonthWith30Days1():void
+        {
+            cnpGenerator.day(31).april();
+        }
+        
+        [Test(expects="ArgumentError")]
+        public function bornOn31stInAMonthWith30Days2():void
+        {
+            cnpGenerator.april().day(31);
+        }
+        
         [Test]
         public function settingDayOn31DoesNotUsesFebruary():void
         {
