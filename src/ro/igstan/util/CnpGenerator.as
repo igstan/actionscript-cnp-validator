@@ -27,13 +27,23 @@ package ro.igstan.util
 {
     public dynamic class CnpGenerator
     {
+        private var isMale:Boolean = true;
+        
+        
         public function generateCnp():String
         {
-            return "1";
+            return isMale ? "1" : "2";
         }
         
         public function male():CnpGenerator
         {
+            isMale = true;
+            return this;
+        }
+        
+        public function female():CnpGenerator
+        {
+            isMale = false;
             return this;
         }
     }

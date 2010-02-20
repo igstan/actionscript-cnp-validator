@@ -40,5 +40,14 @@ package ro.igstan.util.test
             
             Assert.assertEquals("1", cnpGenerator.generateCnp().charAt(0));
         }
+        
+        [Test]
+        public function generateForFemale():void
+        {
+            var cnpGenerator:CnpGenerator = new CnpGenerator();
+            cnpGenerator.female();
+            
+            Assert.assertEquals("2", cnpGenerator.generateCnp().charAt(0));
+        }
     }
 }
