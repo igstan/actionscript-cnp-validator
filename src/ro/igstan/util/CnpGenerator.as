@@ -32,7 +32,7 @@ package ro.igstan.util
     {
         private var isMale:Boolean = true;
         
-        private var userSuppliedYear:String;
+        private var userSuppliedYear:int;
         
         private var userSuppliedMonth:String;
         
@@ -90,14 +90,25 @@ package ro.igstan.util
             return renderYear() + renderMonth() + renderDay();
         }
         
-        protected function renderYear():String
+        protected function getYear():int
         {
             return userSuppliedYear || generateRandomYear();
         }
         
-        protected function generateRandomYear():String
+        protected function renderYear():String
         {
-            return "87";
+            return getYear().toFixed().substring(2, 4);
+        }
+        
+        protected function generateRandomYear():int
+        {
+            return 1987;
+        }
+        
+        public function year(year:int):CnpGenerator
+        {
+            userSuppliedYear = year;
+            return this;
         }
         
         protected function renderMonth():String
@@ -147,12 +158,6 @@ package ro.igstan.util
         public function female():CnpGenerator
         {
             isMale = false;
-            return this;
-        }
-        
-        public function year(year:int):CnpGenerator
-        {
-            userSuppliedYear = year.toFixed().substring(2, 4);
             return this;
         }
         
