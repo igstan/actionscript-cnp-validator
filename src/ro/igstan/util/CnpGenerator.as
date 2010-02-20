@@ -83,7 +83,11 @@ package ro.igstan.util
         
         protected function renderYear():String
         {
-            return year;
+            if (_year === null) {
+                _year = generateRandomYear();
+            }
+            
+            return _year;
         }
         
         protected function renderMonth():String
@@ -112,15 +116,6 @@ package ro.igstan.util
         {
             _year = year.toFixed().substring(2, 4);
             return this;
-        }
-        
-        protected function get year():String
-        {
-            if (_year === null) {
-                _year = generateRandomYear();
-            }
-            
-            return _year;
         }
         
         protected function generateRandomYear():String
@@ -157,7 +152,7 @@ package ro.igstan.util
             }
             
             if (month == "02") {
-                if (!isLeapYear(year) && day > 28) {
+                if (!isLeapYear(renderYear()) && day > 28) {
                     throw new ArgumentError();
                 } else if (day > 29) {
                     throw new ArgumentError();
