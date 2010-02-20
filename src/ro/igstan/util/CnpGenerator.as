@@ -36,32 +36,32 @@ package ro.igstan.util
         
         private var _month:String;
         
-        private static var months:Object = {
-            "january"   : "01",
-            "february"  : "02",
-            "march"     : "03",
-            "april"     : "04",
-            "may"       : "05",
-            "june"      : "06",
-            "july"      : "07",
-            "august"    : "08",
-            "september" : "09",
-            "october"   : "10",
-            "november"  : "11",
-            "december"  : "12"
-        };
+        private static var monthMethods:Array = [
+            "january",
+            "february",
+            "march",
+            "april",
+            "may",
+            "june",
+            "july",
+            "august",
+            "september",
+            "october",
+            "november",
+            "december"
+        ];
         
         
         public static function init(_:ISystemManager):void
         {
-            for (var month:String in months) (function(month:String):void {
+            monthMethods.forEach(function (month:String, i:int, _:Array):void {
+                var monthIndex:String = (i < 9 ? "0" : "") + (i + 1).toFixed();
                 
                 prototype[month] = function():CnpGenerator {
-                    this._month = months[month];
+                    this._month = monthIndex;
                     return this;
                 };
-                
-            })(month);
+            });
         };
 
         public function generateCnp():String
