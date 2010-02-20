@@ -116,7 +116,7 @@ package ro.igstan.util
             return this;
         }
         
-        public function birthYear(year:int):CnpGenerator
+        public function year(year:int):CnpGenerator
         {
             _year = year.toFixed().substring(2, 4);
             return this;

@@ -59,7 +59,7 @@ package ro.igstan.util.test
         [Test]
         public function bornIn89():void
         {
-            cnpGenerator.birthYear(1989);
+            cnpGenerator.year(1989);
             
             Assert.assertEquals("89", cnpGenerator.generateCnp().substring(1, 3));
         }
@@ -109,7 +109,7 @@ package ro.igstan.util.test
         [Test(expects="ArgumentError")]
         public function bornOn2009February29th():void
         {
-            cnpGenerator.birthYear(2009).february().day(39);
+            cnpGenerator.year(2009).february().day(39);
         }
     }
 }
