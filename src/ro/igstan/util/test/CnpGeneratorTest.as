@@ -99,5 +99,19 @@ package ro.igstan.util.test
             var cnpGenerator:CnpGenerator = new CnpGenerator();
             cnpGenerator.day(0);
         }
+        
+        [Test(expects="ArgumentError")]
+        public function bornOnFebruary31st():void
+        {
+            var cnpGenerator:CnpGenerator = new CnpGenerator();
+            cnpGenerator.february().day(31);
+        }
+        
+        [Test(expects="ArgumentError")]
+        public function bornOn2009February29th():void
+        {
+            var cnpGenerator:CnpGenerator = new CnpGenerator();
+            cnpGenerator.birthYear(2009).february().day(39);
+        }
     }
 }

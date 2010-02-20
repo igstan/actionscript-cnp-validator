@@ -130,6 +130,22 @@ package ro.igstan.util
             if (day < 1 || day > 31) {
                 throw new ArgumentError();
             }
+            
+            if (month == "02") {
+                if (!isLeapYear(year) && day > 28) {
+                    throw new ArgumentError();
+                } else if (day > 29) {
+                    throw new ArgumentError();
+                }
+            }
+        }
+        
+        protected function isLeapYear(year:String):Boolean
+        {
+            var yearAsInt:int = parseInt("20" + year, 10);
+            
+            return  yearAsInt % 400 === 0
+                || (yearAsInt % 100 !== 0 && yearAsInt % 4 === 0);
         }
     }
 }
