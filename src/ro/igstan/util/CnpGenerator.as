@@ -178,20 +178,20 @@ package ro.igstan.util
             }
             
             if (userSuppliedMonth !== 0 && getMonth() === 2) {
-                if (!isLeapYear(renderYear()) && day > 28) {
+                if (isLeapYear() && day > 29) {
                     throw new ArgumentError();
-                } else if (day > 29) {
+                } else if (day > 28) {
                     throw new ArgumentError();
                 }
             }
         }
         
-        protected function isLeapYear(year:String):Boolean
+        protected function isLeapYear():Boolean
         {
-            var yearAsInt:int = parseInt("20" + year, 10);
+            var year:int = getYear();
             
-            return  yearAsInt % 400 === 0
-                || (yearAsInt % 100 !== 0 && yearAsInt % 4 === 0);
+            return  year % 400 === 0
+                || (year % 100 !== 0 && year % 4 === 0);
         }
     }
 }
