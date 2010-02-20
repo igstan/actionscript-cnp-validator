@@ -58,11 +58,9 @@ package ro.igstan.util
         
         public static function init(_:ISystemManager):void
         {
-            monthMethods.forEach(function (month:String, i:int, _:Array):void {
-                var monthIndex:String = (i < 9 ? "0" : "") + (i + 1).toFixed();
-                
+            monthMethods.forEach(function (month:String, monthIndex:int, _:Array):void {
                 prototype[month] = function():CnpGenerator {
-                    this.userSuppliedMonth = monthIndex;
+                    this.userSuppliedMonth = monthIndex + 1;
                     return this;
                 };
             });
