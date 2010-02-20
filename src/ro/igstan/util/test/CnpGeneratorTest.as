@@ -125,10 +125,36 @@ package ro.igstan.util.test
                 }
             };
             
-            var cnpGenerator:CnpGenerator = new CnpGenerator(randomMonthGenerator);
+            var cnpGenerator:CnpGenerator = new CnpGenerator({
+                monthGenerator: randomMonthGenerator
+            });
             var cnp:String = cnpGenerator.day(31).generateCnp();
             
             Assert.assertEquals("03", cnp.substring(3, 5));
+        }
+        
+        [Test]
+        public function settingDayOn29AndMonthOnFebruaryGeneratesLeapYear():void
+        {
+            var leapYear:int = 2008;
+            var nonLeapYear:int = 2009;
+            var firstCall:Boolean = true;
+            var randomYearGenerator:Function = function():int {
+                if (firstCall) {
+                    firstCall = false;
+                    return nonLeapYear;
+                } else {
+                    return leapYear;
+                }
+            };
+            
+            var cnpGenerator:CnpGenerator = new CnpGenerator({
+                yearGenerator: randomYearGenerator
+            });
+            
+            var cnp:String = cnpGenerator.february().day(29).generateCnp();
+            
+            Assert.assertEquals("08", cnp.substring(1, 3));
         }
     }
 }

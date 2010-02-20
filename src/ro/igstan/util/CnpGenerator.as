@@ -55,6 +55,8 @@ package ro.igstan.util
         
         private var generateMonth:Function;
         
+        private var generateYear:Function;
+        
         
         public static function init(_:ISystemManager):void
         {
@@ -66,10 +68,16 @@ package ro.igstan.util
             });
         };
         
-        public function CnpGenerator(generateMonth:Function = null)
+        public function CnpGenerator(generators:Object = null)
         {
-            this.generateMonth = generateMonth || function():int {
+            generators = generators || {};
+            
+            this.generateMonth = generators.monthGenerator || function():int {
                 return 6;
+            };
+            
+            this.generateYear = generators.yearGenerator || function():int {
+                return 1987;
             };
         }
 
@@ -100,7 +108,15 @@ package ro.igstan.util
         
         protected function generateRandomYear():int
         {
-            return 1987;
+            var year:int = generateYear();
+            
+            if (userSuppliedDay === 29 && getMonth() === 2) {
+                while (! isLeapYear(year)) {
+                    year = generateYear();
+                }
+            }
+            
+            return year;
         }
         
         public function year(year:int):CnpGenerator
@@ -179,18 +195,16 @@ package ro.igstan.util
             }
             
             if (userSuppliedMonth !== 0 && getMonth() === 2) {
-                if (isLeapYear() && day > 29) {
+                if (userSuppliedYear !== 0 && !isLeapYear(getYear()) && day > 28) {
                     throw new ArgumentError();
-                } else if (day > 28) {
+                } else if (day > 29) {
                     throw new ArgumentError();
                 }
             }
         }
         
-        protected function isLeapYear():Boolean
+        protected function isLeapYear(year:int):Boolean
         {
-            var year:int = getYear();
-            
             return  year % 400 === 0
                 || (year % 100 !== 0 && year % 4 === 0);
         }
