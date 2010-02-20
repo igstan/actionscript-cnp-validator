@@ -134,7 +134,8 @@ package ro.igstan.util
         
         protected function renderDay():String
         {
-            return (userSuppliedDay < 10 ? "0" : "") + userSuppliedDay.toFixed();
+            var day:int = getDay();
+            return (day < 10 ? "0" : "") + day.toFixed();
         }
         
         public function male():CnpGenerator
