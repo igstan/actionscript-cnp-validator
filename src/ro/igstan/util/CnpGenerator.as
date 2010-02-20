@@ -34,7 +34,7 @@ package ro.igstan.util
         
         private var userSuppliedYear:int;
         
-        private var userSuppliedMonth:String;
+        private var userSuppliedMonth:int;
         
         private var userSuppliedDay:int;
         
@@ -70,8 +70,8 @@ package ro.igstan.util
         
         public function CnpGenerator(generateMonth:Function = null)
         {
-            this.generateMonth = generateMonth || function():String {
-                return "06";
+            this.generateMonth = generateMonth || function():int {
+                return 6;
             };
         }
 
@@ -113,24 +113,26 @@ package ro.igstan.util
         
         protected function renderMonth():String
         {
-            if (userSuppliedMonth !== null) {
-                return userSuppliedMonth;
-            }
-            
-            var month:String = generateRandomMonth();
+            var month:int = getMonth();
+            return (month < 10 ? "0" : "") + month.toFixed();
+        }
+        
+        protected function getMonth():int
+        {
+            return userSuppliedMonth || generateRandomMonth();
+        }
+        
+        protected function generateRandomMonth():int
+        {
+            var month:int = generateMonth();
             
             if (getDay() > 29) {
-                while (month === "02") {
-                    month = generateRandomMonth();
+                while (month === 2) {
+                    month = generateMonth();
                 }
             }
             
             return month;
-        }
-        
-        protected function generateRandomMonth():String
-        {
-            return generateMonth();
         }
         
         protected function getDay():int
@@ -175,7 +177,7 @@ package ro.igstan.util
                 throw new ArgumentError();
             }
             
-            if (userSuppliedMonth !== null && renderMonth() == "02") {
+            if (userSuppliedMonth !== 0 && getMonth() === 2) {
                 if (!isLeapYear(renderYear()) && day > 28) {
                     throw new ArgumentError();
                 } else if (day > 29) {

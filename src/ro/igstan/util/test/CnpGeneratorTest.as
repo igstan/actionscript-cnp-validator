@@ -116,12 +116,12 @@ package ro.igstan.util.test
         public function settingDayOn31DoesNotUsesFebruary():void
         {
             var firstCall:Boolean = true;
-            var randomMonthGenerator:Function = function():String {
+            var randomMonthGenerator:Function = function():int {
                 if (firstCall) {
                     firstCall = false;
-                    return "02";
+                    return 2;
                 } else {
-                    return "03";
+                    return 3;
                 }
             };
             
