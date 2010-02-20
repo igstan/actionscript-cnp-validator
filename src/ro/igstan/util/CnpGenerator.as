@@ -198,8 +198,8 @@ package ro.igstan.util
                 throw new ArgumentError();
             }
             
-            if (userSuppliedMonth !== 0 && getMonth() === 2) {
-                if (userSuppliedYear !== 0 && !isLeapYear(getYear()) && day > 28) {
+            if (userSuppliedMonth && getMonth() === 2) {
+                if (userSuppliedYear && !isLeapYear(getYear()) && day > 28) {
                     throw new ArgumentError();
                 } else if (day > 29) {
                     throw new ArgumentError();
@@ -215,10 +215,12 @@ package ro.igstan.util
         
         protected function checkMonthValidity(month:int):void
         {
-            if (month === 2 && userSuppliedDay && getDay() > 28) {
-                if (userSuppliedYear && !isLeapYear(getYear()) && getDay() > 28) {
+            var day:int = getDay();
+            
+            if (month === 2 && userSuppliedDay) {
+                if (userSuppliedYear && !isLeapYear(getYear()) && day > 28) {
                     throw new ArgumentError();
-                } else if (getDay() > 29) {
+                } else if (day > 29) {
                     throw new ArgumentError();
                 }
             }
