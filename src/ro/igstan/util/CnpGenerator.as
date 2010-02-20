@@ -234,7 +234,7 @@ package ro.igstan.util
         
         protected function checkMonthAndDayCompatibility(month:int, day:int):void
         {
-            var dayMax:int = DAYS_IN_MONTH[month];
+            var dayMax:int;
             
             if (month === FEBRUARY) {
                 if (userSuppliedYear && !isLeapYear(getYear())) {
@@ -242,6 +242,8 @@ package ro.igstan.util
                 } else {
                     dayMax = 29;
                 }
+            } else {
+                dayMax = DAYS_IN_MONTH[month];
             }
             
             if (day > dayMax) {
