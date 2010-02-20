@@ -227,13 +227,13 @@ package ro.igstan.util
                 throw new ArgumentError();
             }
             
-            if (userSuppliedMonth) {
-                checkMonthAndDayCompatibility(getMonth(), day);
-            }
+            checkMonthAndDayCompatibility(userSuppliedMonth, getMonth(), day);
         }
         
-        protected function checkMonthAndDayCompatibility(month:int, day:int):void
+        protected function checkMonthAndDayCompatibility(counterPart:int, month:int, day:int):void
         {
+            if (!counterPart) return;
+            
             var dayMax:int;
             
             if (month === FEBRUARY) {
@@ -253,9 +253,7 @@ package ro.igstan.util
         
         protected function checkMonthValidity(month:int):void
         {
-            if (userSuppliedDay) {
-                checkMonthAndDayCompatibility(month, getDay());
-            }
+            checkMonthAndDayCompatibility(userSuppliedDay, month, getDay());
         }
         
         protected function isLeapYear(year:int):Boolean
