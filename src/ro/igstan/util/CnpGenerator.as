@@ -36,6 +36,8 @@ package ro.igstan.util
         
         private var _month:String;
         
+        private var _day:String;
+        
         private static var monthMethods:Array = [
             "january",
             "february",
@@ -66,7 +68,7 @@ package ro.igstan.util
 
         public function generateCnp():String
         {
-            return (isMale ? "1" : "2") + year + _month;
+            return (isMale ? "1" : "2") + year + month + _day;
         }
         
         public function male():CnpGenerator
@@ -99,6 +101,26 @@ package ro.igstan.util
         protected function generateRandomYear():String
         {
             return "87";
+        }
+        
+        protected function get month():String
+        {
+            if (_month === null) {
+                _month = generateRandomMonth();
+            }
+            
+            return _month;
+        }
+        
+        protected function generateRandomMonth():String
+        {
+            return "06";
+        }
+        
+        public function day(day:int):CnpGenerator
+        {
+            this._day = (day < 10 ? "0" : "") + day.toFixed();
+            return this;
         }
     }
 }
