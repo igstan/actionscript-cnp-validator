@@ -111,10 +111,10 @@ package ro.igstan.util
         
         protected function renderMonth():String
         {
-            return renderBirthDatePart(getMonth());
+            return zeroFill(getMonth());
         }
         
-        protected function renderBirthDatePart(part:int):String
+        protected function zeroFill(part:int):String
         {
             return (part < 10 ? "0" : "") + part.toFixed();
         }
@@ -149,7 +149,7 @@ package ro.igstan.util
         
         protected function renderDay():String
         {
-            return renderBirthDatePart(getDay());
+            return zeroFill(getDay());
         }
         
         public function male():CnpGenerator
