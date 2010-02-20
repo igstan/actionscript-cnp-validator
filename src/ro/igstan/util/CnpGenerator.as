@@ -61,8 +61,12 @@ package ro.igstan.util
         public static function init(_:ISystemManager):void
         {
             monthMethods.forEach(function (month:String, monthIndex:int, _:Array):void {
+                monthIndex += 1;
+                
                 prototype[month] = function():CnpGenerator {
-                    this.userSuppliedMonth = monthIndex + 1;
+                    this.checkMonthValidity(monthIndex);
+                    
+                    this.userSuppliedMonth = monthIndex;
                     return this;
                 };
             });
@@ -207,6 +211,17 @@ package ro.igstan.util
         {
             return  year % 400 === 0
                 || (year % 100 !== 0 && year % 4 === 0);
+        }
+        
+        protected function checkMonthValidity(month:int):void
+        {
+            if (month === 2 && userSuppliedDay && getDay() > 28) {
+                if (userSuppliedYear && !isLeapYear(getYear()) && getDay() > 28) {
+                    throw new ArgumentError();
+                } else if (getDay() > 29) {
+                    throw new ArgumentError();
+                }
+            }
         }
     }
 }
