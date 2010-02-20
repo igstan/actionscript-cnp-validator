@@ -111,5 +111,24 @@ package ro.igstan.util.test
         {
             cnpGenerator.year(2009).february().day(39);
         }
+        
+        [Test]
+        public function settingDayOn31DoesNotUsesFebruary():void
+        {
+            var firstCall:Boolean = true;
+            var randomMonthGenerator:Function = function():String {
+                if (firstCall) {
+                    firstCall = false;
+                    return "02";
+                } else {
+                    return "03";
+                }
+            };
+            
+            var cnpGenerator:CnpGenerator = new CnpGenerator(randomMonthGenerator);
+            var cnp:String = cnpGenerator.day(31).generateCnp();
+            
+            Assert.assertEquals("03", cnp.substring(3, 5));
+        }
     }
 }

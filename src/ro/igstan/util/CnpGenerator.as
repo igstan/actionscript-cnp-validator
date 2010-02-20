@@ -36,7 +36,7 @@ package ro.igstan.util
         
         private var _month:String;
         
-        private var _day:String;
+        private var _day:int;
         
         private static var monthMethods:Array = [
             "january",
@@ -53,6 +53,8 @@ package ro.igstan.util
             "december"
         ];
         
+        private var generateMonth:Function;
+        
         
         public static function init(_:ISystemManager):void
         {
@@ -65,6 +67,13 @@ package ro.igstan.util
                 };
             });
         };
+        
+        public function CnpGenerator(generateMonth:Function = null)
+        {
+            this.generateMonth = generateMonth || function():String {
+                return "06";
+            };
+        }
 
         public function generateCnp():String
         {
@@ -93,17 +102,39 @@ package ro.igstan.util
         
         protected function renderMonth():String
         {
-            return _month || generateRandomMonth();
+            if (_month !== null) {
+                return _month;
+            }
+            
+            var month:String = generateRandomMonth();
+            
+            if (getDay() > 29) {
+                while (month === "02") {
+                    month = generateRandomMonth();
+                }
+            }
+            
+            return month;
         }
         
         protected function generateRandomMonth():String
         {
-            return "06";
+            return generateMonth();
+        }
+        
+        protected function getDay():int
+        {
+            return _day || generateRandomDay();
+        }
+        
+        protected function generateRandomDay():int
+        {
+            return 21;
         }
         
         protected function renderDay():String
         {
-            return _day;
+            return (_day < 10 ? "0" : "") + _day.toFixed();
         }
         
         public function male():CnpGenerator
@@ -128,7 +159,7 @@ package ro.igstan.util
         {
             checkDayValidity(day);
             
-            this._day = (day < 10 ? "0" : "") + day.toFixed();
+            this._day = day;
             return this;
         }
         
@@ -138,7 +169,7 @@ package ro.igstan.util
                 throw new ArgumentError();
             }
             
-            if (renderMonth() == "02") {
+            if (_month !== null && renderMonth() == "02") {
                 if (!isLeapYear(renderYear()) && day > 28) {
                     throw new ArgumentError();
                 } else if (day > 29) {
