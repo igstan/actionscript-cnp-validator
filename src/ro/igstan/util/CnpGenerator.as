@@ -29,10 +29,12 @@ package ro.igstan.util
     {
         private var isMale:Boolean = true;
         
+        private var year:String;
+        
         
         public function generateCnp():String
         {
-            return isMale ? "1" : "2";
+            return (isMale ? "1" : "2") + year;
         }
         
         public function male():CnpGenerator
@@ -44,6 +46,12 @@ package ro.igstan.util
         public function female():CnpGenerator
         {
             isMale = false;
+            return this;
+        }
+        
+        public function birthYear(year:int):CnpGenerator
+        {
+            this.year = year.toFixed().substring(2, 4);
             return this;
         }
     }

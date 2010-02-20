@@ -49,5 +49,14 @@ package ro.igstan.util.test
             
             Assert.assertEquals("2", cnpGenerator.generateCnp().charAt(0));
         }
+        
+        [Test]
+        public function bornIn89():void
+        {
+            var cnpGenerator:CnpGenerator = new CnpGenerator();
+            cnpGenerator.birthYear(1989);
+            
+            Assert.assertEquals("89", cnpGenerator.generateCnp().substring(1, 3));
+        }
     }
 }
