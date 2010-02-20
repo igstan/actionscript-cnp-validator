@@ -32,10 +32,17 @@ package ro.igstan.util.test
     
     public class CnpGeneratorTest
     {
+        private var cnpGenerator:CnpGenerator;
+        
+        [Before]
+        public function setUp():void
+        {
+            cnpGenerator = new CnpGenerator();
+        }
+        
         [Test]
         public function generateForMale():void
         {
-            var cnpGenerator:CnpGenerator = new CnpGenerator();
             cnpGenerator.male();
             
             Assert.assertEquals("1", cnpGenerator.generateCnp().charAt(0));
@@ -44,7 +51,6 @@ package ro.igstan.util.test
         [Test]
         public function generateForFemale():void
         {
-            var cnpGenerator:CnpGenerator = new CnpGenerator();
             cnpGenerator.female();
             
             Assert.assertEquals("2", cnpGenerator.generateCnp().charAt(0));
@@ -53,7 +59,6 @@ package ro.igstan.util.test
         [Test]
         public function bornIn89():void
         {
-            var cnpGenerator:CnpGenerator = new CnpGenerator();
             cnpGenerator.birthYear(1989);
             
             Assert.assertEquals("89", cnpGenerator.generateCnp().substring(1, 3));
@@ -62,7 +67,6 @@ package ro.igstan.util.test
         [Test]
         public function bornInFebruary():void
         {
-            var cnpGenerator:CnpGenerator = new CnpGenerator();
             cnpGenerator.february();
             
             Assert.assertEquals("02", cnpGenerator.generateCnp().substring(3, 5));
@@ -71,7 +75,6 @@ package ro.igstan.util.test
         [Test]
         public function bornInMay():void
         {
-            var cnpGenerator:CnpGenerator = new CnpGenerator();
             cnpGenerator.may();
             
             Assert.assertEquals("05", cnpGenerator.generateCnp().substring(3, 5));
@@ -80,7 +83,6 @@ package ro.igstan.util.test
         [Test]
         public function bornOn4th():void
         {
-            var cnpGenerator:CnpGenerator = new CnpGenerator();
             cnpGenerator.day(4);
             
             Assert.assertEquals("04", cnpGenerator.generateCnp().substring(5, 7));
@@ -89,28 +91,24 @@ package ro.igstan.util.test
         [Test(expects="ArgumentError")]
         public function bornOn32nd():void
         {
-            var cnpGenerator:CnpGenerator = new CnpGenerator();
             cnpGenerator.day(32);
         }
         
         [Test(expects="ArgumentError")]
         public function bornOnZeroDay():void
         {
-            var cnpGenerator:CnpGenerator = new CnpGenerator();
             cnpGenerator.day(0);
         }
         
         [Test(expects="ArgumentError")]
         public function bornOnFebruary31st():void
         {
-            var cnpGenerator:CnpGenerator = new CnpGenerator();
             cnpGenerator.february().day(31);
         }
         
         [Test(expects="ArgumentError")]
         public function bornOn2009February29th():void
         {
-            var cnpGenerator:CnpGenerator = new CnpGenerator();
             cnpGenerator.birthYear(2009).february().day(39);
         }
     }
