@@ -32,11 +32,11 @@ package ro.igstan.util
     {
         private var isMale:Boolean = true;
         
-        private var _year:String;
+        private var userSuppliedYear:String;
         
-        private var _month:String;
+        private var userSuppliedMonth:String;
         
-        private var _day:int;
+        private var userSuppliedDay:int;
         
         private static var monthMethods:Array = [
             "january",
@@ -62,7 +62,7 @@ package ro.igstan.util
                 var monthIndex:String = (i < 9 ? "0" : "") + (i + 1).toFixed();
                 
                 prototype[month] = function():CnpGenerator {
-                    this._month = monthIndex;
+                    this.userSuppliedMonth = monthIndex;
                     return this;
                 };
             });
@@ -92,7 +92,7 @@ package ro.igstan.util
         
         protected function renderYear():String
         {
-            return _year || generateRandomYear();
+            return userSuppliedYear || generateRandomYear();
         }
         
         protected function generateRandomYear():String
@@ -102,8 +102,8 @@ package ro.igstan.util
         
         protected function renderMonth():String
         {
-            if (_month !== null) {
-                return _month;
+            if (userSuppliedMonth !== null) {
+                return userSuppliedMonth;
             }
             
             var month:String = generateRandomMonth();
@@ -124,7 +124,7 @@ package ro.igstan.util
         
         protected function getDay():int
         {
-            return _day || generateRandomDay();
+            return userSuppliedDay || generateRandomDay();
         }
         
         protected function generateRandomDay():int
@@ -134,7 +134,7 @@ package ro.igstan.util
         
         protected function renderDay():String
         {
-            return (_day < 10 ? "0" : "") + _day.toFixed();
+            return (userSuppliedDay < 10 ? "0" : "") + userSuppliedDay.toFixed();
         }
         
         public function male():CnpGenerator
@@ -151,7 +151,7 @@ package ro.igstan.util
         
         public function year(year:int):CnpGenerator
         {
-            _year = year.toFixed().substring(2, 4);
+            userSuppliedYear = year.toFixed().substring(2, 4);
             return this;
         }
         
@@ -159,7 +159,7 @@ package ro.igstan.util
         {
             checkDayValidity(day);
             
-            this._day = day;
+            this.userSuppliedDay = day;
             return this;
         }
         
@@ -169,7 +169,7 @@ package ro.igstan.util
                 throw new ArgumentError();
             }
             
-            if (_month !== null && renderMonth() == "02") {
+            if (userSuppliedMonth !== null && renderMonth() == "02") {
                 if (!isLeapYear(renderYear()) && day > 28) {
                     throw new ArgumentError();
                 } else if (day > 29) {
