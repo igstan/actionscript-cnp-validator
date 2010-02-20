@@ -78,7 +78,22 @@ package ro.igstan.util
         
         protected function birthDate():String
         {
-            return year + month + _day;
+            return renderYear() + renderMonth() + renderDay();
+        }
+        
+        protected function renderYear():String
+        {
+            return year;
+        }
+        
+        protected function renderMonth():String
+        {
+            return month;
+        }
+        
+        protected function renderDay():String
+        {
+            return _day;
         }
         
         public function male():CnpGenerator
