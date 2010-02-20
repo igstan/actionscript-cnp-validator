@@ -68,7 +68,17 @@ package ro.igstan.util
 
         public function generateCnp():String
         {
-            return (isMale ? "1" : "2") + year + month + _day;
+            return genderDigit() + birthDate();
+        }
+        
+        protected function genderDigit():String
+        {
+            return isMale ? "1" : "2";
+        }
+        
+        protected function birthDate():String
+        {
+            return year + month + _day;
         }
         
         public function male():CnpGenerator
