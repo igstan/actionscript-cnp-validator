@@ -107,7 +107,7 @@ package ro.igstan.util.test
         }
         
         [Test(expects="ArgumentError")]
-        public function bornOn2009February29th():void
+        public function bornOnFebruary29thInANonLeapYear():void
         {
             cnpGenerator.year(2009).february().day(29);
         }
