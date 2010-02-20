@@ -83,20 +83,12 @@ package ro.igstan.util
         
         protected function renderYear():String
         {
-            if (_year === null) {
-                _year = generateRandomYear();
-            }
-            
-            return _year;
+            return _year || generateRandomYear();
         }
         
         protected function renderMonth():String
         {
-            if (_month === null) {
-                _month = generateRandomMonth();
-            }
-            
-            return _month;
+            return _month || generateRandomMonth();
         }
         
         protected function renderDay():String
