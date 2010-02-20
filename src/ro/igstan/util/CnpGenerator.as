@@ -111,8 +111,12 @@ package ro.igstan.util
         
         protected function renderMonth():String
         {
-            var month:int = getMonth();
-            return (month < 10 ? "0" : "") + month.toFixed();
+            return renderBirthDatePart(getMonth());
+        }
+        
+        protected function renderBirthDatePart(part:int):String
+        {
+            return (part < 10 ? "0" : "") + part.toFixed();
         }
         
         protected function getMonth():int
@@ -145,8 +149,7 @@ package ro.igstan.util
         
         protected function renderDay():String
         {
-            var day:int = getDay();
-            return (day < 10 ? "0" : "") + day.toFixed();
+            return renderBirthDatePart(getDay());
         }
         
         public function male():CnpGenerator
