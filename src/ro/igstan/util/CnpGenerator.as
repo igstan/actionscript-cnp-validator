@@ -29,12 +29,14 @@ package ro.igstan.util
     {
         private var isMale:Boolean = true;
         
-        private var year:String;
+        private var _year:String;
+        
+        private var month:String;
         
         
         public function generateCnp():String
         {
-            return (isMale ? "1" : "2") + year;
+            return (isMale ? "1" : "2") + year + month;
         }
         
         public function male():CnpGenerator
@@ -51,8 +53,28 @@ package ro.igstan.util
         
         public function birthYear(year:int):CnpGenerator
         {
-            this.year = year.toFixed().substring(2, 4);
+            _year = year.toFixed().substring(2, 4);
             return this;
+        }
+        
+        public function february():CnpGenerator
+        {
+            this.month = "02";
+            return this;
+        }
+        
+        protected function get year():String
+        {
+            if (_year === null) {
+                _year = generateRandomYear();
+            }
+            
+            return _year;
+        }
+        
+        protected function generateRandomYear():String
+        {
+            return "87";
         }
     }
 }
