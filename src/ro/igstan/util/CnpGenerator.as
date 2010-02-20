@@ -119,8 +119,17 @@ package ro.igstan.util
         
         public function day(day:int):CnpGenerator
         {
+            checkDayValidity(day);
+            
             this._day = (day < 10 ? "0" : "") + day.toFixed();
             return this;
+        }
+        
+        protected function checkDayValidity(day:int):void
+        {
+            if (day < 1 || day > 31) {
+                throw new ArgumentError();
+            }
         }
     }
 }

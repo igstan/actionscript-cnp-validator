@@ -85,5 +85,19 @@ package ro.igstan.util.test
             
             Assert.assertEquals("04", cnpGenerator.generateCnp().substring(5, 7));
         }
+        
+        [Test(expects="ArgumentError")]
+        public function bornOn32nd():void
+        {
+            var cnpGenerator:CnpGenerator = new CnpGenerator();
+            cnpGenerator.day(32);
+        }
+        
+        [Test(expects="ArgumentError")]
+        public function bornOnZeroDay():void
+        {
+            var cnpGenerator:CnpGenerator = new CnpGenerator();
+            cnpGenerator.day(0);
+        }
     }
 }
