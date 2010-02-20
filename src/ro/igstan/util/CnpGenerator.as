@@ -86,9 +86,19 @@ package ro.igstan.util
             return _year || generateRandomYear();
         }
         
+        protected function generateRandomYear():String
+        {
+            return "87";
+        }
+        
         protected function renderMonth():String
         {
             return _month || generateRandomMonth();
+        }
+        
+        protected function generateRandomMonth():String
+        {
+            return "06";
         }
         
         protected function renderDay():String
@@ -112,16 +122,6 @@ package ro.igstan.util
         {
             _year = year.toFixed().substring(2, 4);
             return this;
-        }
-        
-        protected function generateRandomYear():String
-        {
-            return "87";
-        }
-        
-        protected function generateRandomMonth():String
-        {
-            return "06";
         }
         
         public function day(day:int):CnpGenerator
