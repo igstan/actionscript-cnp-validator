@@ -262,11 +262,7 @@ package ro.igstan.util
         
         protected function maxDayForFebruary():int
         {
-            if (userSuppliedYear && !isLeapYear(getYear())) {
-                return 28;
-            } else {
-                return 29;
-            }
+            return isLeapYear(userSuppliedYear) ? 29 : 28;
         }
         
         protected function checkMonthValidity(month:int):void
