@@ -208,5 +208,21 @@ package ro.igstan.util.test
             var cnp:String = cnpGenerator.regionPrahova().generateCnp();
             Assert.assertEquals("29", cnp.substring(7, 9));
         }
+        
+        [Test]
+        public function bornInRandomRegion():void
+        {
+            var randomRegionGenerator:Function = function():String {
+                return "13";
+            };
+            
+            var cnpGenerator:CnpGenerator = new CnpGenerator({
+                regionGenerator: randomRegionGenerator
+            });
+            
+            var cnp:String = cnpGenerator.generateCnp();
+            
+            Assert.assertEquals("13", cnp.substring(7, 9));
+        }
     }
 }

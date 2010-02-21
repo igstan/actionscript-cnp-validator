@@ -139,6 +139,8 @@ package ro.igstan.util
         
         private var generateYear:Function;
         
+        private var generateRegion:Function;
+        
         
         public static function init(_:ISystemManager):void
         {
@@ -172,6 +174,10 @@ package ro.igstan.util
             this.generateYear = generators.yearGenerator || function():int {
                 return 1987;
             };
+            
+            this.generateRegion = generators.regionGenerator || function():String {
+                return "01";
+            };
         }
         
         public function generateCnp():String
@@ -183,7 +189,7 @@ package ro.igstan.util
         
         protected function renderCountyCode():String
         {
-            return userSuppliedRegion;
+            return userSuppliedRegion || generateRegion();
         }
         
         protected function renderGenderDigit():String
