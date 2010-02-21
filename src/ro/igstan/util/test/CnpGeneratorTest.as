@@ -201,5 +201,12 @@ package ro.igstan.util.test
             
             Assert.assertEquals("08", cnp.substring(1, 3));
         }
+        
+        [Test]
+        public function bornInPrahova():void
+        {
+            var cnp:String = cnpGenerator.regionPrahova().generateCnp();
+            Assert.assertEquals("29", cnp.substring(7, 9));
+        }
     }
 }

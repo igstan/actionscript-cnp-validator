@@ -59,6 +59,57 @@ package ro.igstan.util
             DAYS_IN_MONTH[ DECEMBER ]  = 31;
         };
         
+        public static const REGIONS:Object = {
+            Alba             : "01",
+            Arad             : "02",
+            Arges            : "03",
+            Bacau            : "04",
+            Bihor            : "05",
+            BistritaNasaud   : "06",
+            Botosani         : "07",
+            Brasov           : "08",
+            Braila           : "09",
+            Buzau            : "10",
+            CarasSeverin     : "11",
+            Cluj             : "12",
+            Constanta        : "13",
+            Covasna          : "14",
+            Dambovita        : "15",
+            Dolj             : "16",
+            Galati           : "17",
+            Gorj             : "18",
+            Harghita         : "19",
+            Hunedoara        : "20",
+            Ialomita         : "21",
+            Iasi             : "22",
+            Ilfov            : "23",
+            Maramures        : "24",
+            Mehedinti        : "25",
+            Mures            : "26",
+            Neamt            : "27",
+            Olt              : "28",
+            Prahova          : "29",
+            SatuMare         : "30",
+            Salaj            : "31",
+            Sibiu            : "32",
+            Suceava          : "33",
+            Teleorman        : "34",
+            Timis            : "35",
+            Tulcea           : "36",
+            Vaslui           : "37",
+            Valcea           : "38",
+            Vrancea          : "39",
+            Bucuresti        : "40",
+            BucurestiSector1 : "41",
+            BucurestiSector2 : "42",
+            BucurestiSector3 : "43",
+            BucurestiSector4 : "44",
+            BucurestiSector5 : "45",
+            BucurestiSector6 : "46",
+            Calarasi         : "51",
+            Giurgiu          : "52"
+        };
+        
         private var isMale:Boolean = true;
         
         private var userSuppliedYear:int;
@@ -66,6 +117,8 @@ package ro.igstan.util
         private var userSuppliedMonth:int;
         
         private var userSuppliedDay:int;
+        
+        private var userSuppliedRegion:String;
         
         private static var monthMethods:Array = [
             "january",
@@ -99,6 +152,13 @@ package ro.igstan.util
                     return this;
                 };
             });
+            
+            for (var region:String in REGIONS) (function (region:String):void {
+                prototype["region" + region] = function():CnpGenerator {
+                    this.userSuppliedRegion = REGIONS[region];
+                    return this;
+                };
+            })(region);
         };
         
         public function CnpGenerator(generators:Object = null)
@@ -116,7 +176,14 @@ package ro.igstan.util
         
         public function generateCnp():String
         {
-            return renderGenderDigit() + renderBirthDate();
+            return renderGenderDigit() +
+                   renderBirthDate()   +
+                   renderCountyCode();
+        }
+        
+        protected function renderCountyCode():String
+        {
+            return userSuppliedRegion;
         }
         
         protected function renderGenderDigit():String
