@@ -175,12 +175,17 @@ package ro.igstan.util
         
         protected function generateRandomMonth():int
         {
+            return getDay() > 29
+                 ? generateMonthOtherThanFebruary()
+                 : generateMonth();
+        }
+        
+        protected function generateMonthOtherThanFebruary():int
+        {
             var month:int = generateMonth();
             
-            if (getDay() > 29) {
-                while (month === FEBRUARY) {
-                    month = generateMonth();
-                }
+            while (month === FEBRUARY) {
+                month = generateMonth();
             }
             
             return month;
