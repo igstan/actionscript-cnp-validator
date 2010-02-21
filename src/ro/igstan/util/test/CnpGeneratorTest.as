@@ -41,22 +41,6 @@ package ro.igstan.util.test
         }
         
         [Test]
-        public function generateForMale():void
-        {
-            cnpGenerator.male();
-            
-            Assert.assertEquals("1", cnpGenerator.generateCnp().charAt(0));
-        }
-        
-        [Test]
-        public function generateForFemale():void
-        {
-            cnpGenerator.female();
-            
-            Assert.assertEquals("2", cnpGenerator.generateCnp().charAt(0));
-        }
-        
-        [Test]
         public function bornIn89():void
         {
             var cnp:String = cnpGenerator.year(1989).generateCnp();
