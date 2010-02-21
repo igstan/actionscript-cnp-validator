@@ -59,7 +59,7 @@ package ro.igstan.util
             DAYS_IN_MONTH[ DECEMBER ]  = 31;
         };
         
-        public static const REGIONS:Object = {
+        protected static const REGIONS:Object = {
             Alba             : "01",
             Arad             : "02",
             Arges            : "03",
