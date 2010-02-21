@@ -144,21 +144,30 @@ package ro.igstan.util
         
         public static function init(_:ISystemManager):void
         {
+            generateMonthSetters();
+            generateRegionSetters();
+        }
+        
+        public static function generateMonthSetters():void
+        {
             monthMethods.forEach(function (month:String, monthIndex:int, _:Array):void {
                 monthIndex += 1;
                 
-                prototype[month] = function():CnpGenerator {
+                CnpGenerator.prototype[month] = function():CnpGenerator {
                     return this.month(monthIndex);
                 };
             });
-            
+        }
+        
+        public static function generateRegionSetters():void
+        {
             for (var region:String in REGIONS) (function (region:String):void {
                 prototype["region" + region] = function():CnpGenerator {
                     this.userSuppliedRegion = REGIONS[region];
                     return this;
                 };
             })(region);
-        };
+        }
         
         public function CnpGenerator(generators:Object = null)
         {
