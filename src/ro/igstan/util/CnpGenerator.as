@@ -110,17 +110,7 @@ package ro.igstan.util
             Giurgiu          : "52"
         };
         
-        private var isMale:Boolean = true;
-        
-        private var userSuppliedYear:int;
-        
-        private var userSuppliedMonth:int;
-        
-        private var userSuppliedDay:int;
-        
-        private var userSuppliedRegion:String;
-        
-        private static var monthMethods:Array = [
+        private static const monthMethods:Array = [
             "january",
             "february",
             "march",
@@ -135,6 +125,16 @@ package ro.igstan.util
             "december"
         ];
         
+        private var isMale:Boolean = true;
+        
+        private var userSuppliedYear:int;
+        
+        private var userSuppliedMonth:int;
+        
+        private var userSuppliedDay:int;
+        
+        private var userSuppliedRegion:String;
+        
         private var generateMonth:Function;
         
         private var generateYear:Function;
@@ -148,10 +148,7 @@ package ro.igstan.util
                 monthIndex += 1;
                 
                 prototype[month] = function():CnpGenerator {
-                    this.checkMonthValidity(monthIndex);
-                    
-                    this.userSuppliedMonth = monthIndex;
-                    return this;
+                    return this.month(monthIndex);
                 };
             });
             
@@ -344,6 +341,13 @@ package ro.igstan.util
         protected function isLeapYear(year:int):Boolean
         {
             return  year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
+        }
+        
+        protected function month(monthIndex:int):CnpGenerator
+        {
+            checkMonthValidity(monthIndex);
+            userSuppliedMonth = monthIndex;
+            return this;
         }
     }
 }
