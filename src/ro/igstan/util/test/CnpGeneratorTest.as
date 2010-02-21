@@ -209,48 +209,42 @@ package ro.igstan.util.test
         public function maleBornBetween1900And1999HasGenderDigit1():void
         {
             var cnp:String = cnpGenerator.male().year(1980).generateCnp();
-            
-            Assert.assertEquals("1", cnp.charAt(0));
+            assertGenderDigit("1", cnp);
         }
         
         [Test]
         public function femaleBornBetween1900And1999HasGenderDigit2():void
         {
             var cnp:String = cnpGenerator.female().year(1980).generateCnp();
-            
-            Assert.assertEquals("2", cnp.charAt(0));
+            assertGenderDigit("2", cnp);
         }
         
         [Test]
         public function maleBornBetween1800And1899HasGenderDigit3():void
         {
             var cnp:String = cnpGenerator.male().year(1880).generateCnp();
-            
-            Assert.assertEquals("3", cnp.charAt(0));
+            assertGenderDigit("3", cnp);
         }
         
         [Test]
         public function femaleBornBetween1800And1899HasGenderDigit4():void
         {
             var cnp:String = cnpGenerator.female().year(1880).generateCnp();
-            
-            Assert.assertEquals("4", cnp.charAt(0));
+            assertGenderDigit("4", cnp);
         }
         
         [Test]
         public function maleBornBetween2000And2099HasGenderDigit5():void
         {
             var cnp:String = cnpGenerator.male().year(2080).generateCnp();
-            
-            Assert.assertEquals("5", cnp.charAt(0));
+            assertGenderDigit("5", cnp);
         }
         
         [Test]
         public function femaleBornBetween2000And2099HasGenderDigit6():void
         {
             var cnp:String = cnpGenerator.female().year(2080).generateCnp();
-            
-            Assert.assertEquals("6", cnp.charAt(0));
+            assertGenderDigit("6", cnp);
         }
         
         protected function assertBirthYear(expectedYear:String, cnp:String):void
@@ -271,6 +265,11 @@ package ro.igstan.util.test
         protected function assertRegion(expectedRegion:String, cnp:String):void
         {
             Assert.assertEquals(expectedRegion, cnp.substring(7, 9));
+        }
+        
+        protected function assertGenderDigit(genderDigit:String, cnp:String):void
+        {
+            Assert.assertEquals(genderDigit, cnp.charAt(0));
         }
     }
 }
