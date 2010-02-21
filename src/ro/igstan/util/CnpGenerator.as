@@ -141,12 +141,22 @@ package ro.igstan.util
         
         protected function generateRandomYear():int
         {
+            return userRequiresLeapYear()
+                 ? generateLeapYear()
+                 : generateYear();
+        }
+        
+        protected function userRequiresLeapYear():Boolean
+        {
+            return getMonth() === FEBRUARY && userSuppliedDay === 29;
+        }
+        
+        protected function generateLeapYear():int
+        {
             var year:int = generateYear();
             
-            if (userSuppliedDay === 29 && getMonth() === FEBRUARY) {
-                while (! isLeapYear(year)) {
-                    year = generateYear();
-                }
+            while (! isLeapYear(year)) {
+                year = generateYear();
             }
             
             return year;
