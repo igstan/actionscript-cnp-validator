@@ -141,9 +141,7 @@ package ro.igstan.util
         
         protected function generateRandomYear():int
         {
-            return userRequiresLeapYear()
-                 ? generateLeapYear()
-                 : generateYear();
+            return userRequiresLeapYear() ? generateLeapYear() : generateYear();
         }
         
         protected function userRequiresLeapYear():Boolean
