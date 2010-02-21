@@ -59,33 +59,29 @@ package ro.igstan.util.test
         [Test]
         public function bornIn89():void
         {
-            cnpGenerator.year(1989);
-            
-            Assert.assertEquals("89", cnpGenerator.generateCnp().substring(1, 3));
+            var cnp:String = cnpGenerator.year(1989).generateCnp();
+            assertBirthYear("89", cnp);
         }
         
         [Test]
         public function bornInFebruary():void
         {
-            cnpGenerator.february();
-            
-            Assert.assertEquals("02", cnpGenerator.generateCnp().substring(3, 5));
+            var cnp:String = cnpGenerator.february().generateCnp();
+            assertBirthMonth("02", cnp);
         }
         
         [Test]
         public function bornInMay():void
         {
-            cnpGenerator.may();
-            
-            Assert.assertEquals("05", cnpGenerator.generateCnp().substring(3, 5));
+            var cnp:String = cnpGenerator.may().generateCnp();
+            assertBirthMonth("05", cnp);
         }
         
         [Test]
         public function bornOn4th():void
         {
-            cnpGenerator.day(4);
-            
-            Assert.assertEquals("04", cnpGenerator.generateCnp().substring(5, 7));
+            var cnp:String = cnpGenerator.day(4).generateCnp();
+            assertBirthDay("04", cnp);
         }
         
         [Test(expects="ArgumentError")]
@@ -154,7 +150,7 @@ package ro.igstan.util.test
             });
             var cnp:String = cnpGenerator.day(31).generateCnp();
             
-            Assert.assertEquals("03", cnp.substring(3, 5));
+            assertBirthMonth("03", cnp);
         }
         
         [Test]
@@ -175,7 +171,7 @@ package ro.igstan.util.test
             });
             var cnp:String = cnpGenerator.day(30).generateCnp();
             
-            Assert.assertEquals("03", cnp.substring(3, 5));
+            assertBirthMonth("03", cnp);
         }
         
         [Test]
@@ -199,14 +195,14 @@ package ro.igstan.util.test
             
             var cnp:String = cnpGenerator.february().day(29).generateCnp();
             
-            Assert.assertEquals("08", cnp.substring(1, 3));
+            assertBirthYear("08", cnp);
         }
         
         [Test]
         public function bornInPrahova():void
         {
             var cnp:String = cnpGenerator.regionPrahova().generateCnp();
-            Assert.assertEquals("29", cnp.substring(7, 9));
+            assertRegion("29", cnp);
         }
         
         [Test]
@@ -222,7 +218,27 @@ package ro.igstan.util.test
             
             var cnp:String = cnpGenerator.generateCnp();
             
-            Assert.assertEquals("13", cnp.substring(7, 9));
+            assertRegion("13", cnp);
+        }
+        
+        protected function assertBirthYear(expectedYear:String, cnp:String):void
+        {
+            Assert.assertEquals(expectedYear, cnp.substring(1, 3));
+        }
+        
+        protected function assertBirthMonth(expectedMonth:String, cnp:String):void
+        {
+            Assert.assertEquals(expectedMonth, cnp.substring(3, 5));
+        }
+        
+        protected function assertBirthDay(expectedDay:String, cnp:String):void
+        {
+            Assert.assertEquals(expectedDay, cnp.substring(5, 7));
+        }
+        
+        protected function assertRegion(expectedRegion:String, cnp:String):void
+        {
+            Assert.assertEquals(expectedRegion, cnp.substring(7, 9));
         }
     }
 }
