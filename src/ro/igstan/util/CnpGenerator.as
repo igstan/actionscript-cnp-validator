@@ -182,9 +182,9 @@ package ro.igstan.util
         
         public function generateCnp():String
         {
-            return renderGenderDigit() +
-                   renderBirthDate()   +
-                   renderCountyCode();
+            return renderGenderDigit()
+                 + renderBirthDate()
+                 + renderCountyCode();
         }
         
         protected function renderCountyCode():String
