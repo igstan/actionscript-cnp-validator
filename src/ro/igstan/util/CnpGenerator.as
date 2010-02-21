@@ -200,7 +200,17 @@ package ro.igstan.util
         
         protected function renderGenderDigit():String
         {
-            return isMale ? "1" : "2";
+            var year:int = getYear();
+            
+            if (year > 1900 && year < 1999) {
+                return isMale ? "1" : "2";
+            }
+            
+            if (year > 1800 && year < 1899) {
+                return isMale ? "3" : "4";
+            }
+            
+            return isMale ? "5" : "6";
         }
         
         protected function renderBirthDate():String
