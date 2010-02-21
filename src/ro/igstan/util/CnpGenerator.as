@@ -151,10 +151,8 @@ package ro.igstan.util
         public static function generateMonthSetters():void
         {
             monthMethods.forEach(function (month:String, monthIndex:int, _:Array):void {
-                monthIndex += 1;
-                
                 CnpGenerator.prototype[month] = function():CnpGenerator {
-                    return this.month(monthIndex);
+                    return this.month(monthIndex + 1);
                 };
             });
         }
