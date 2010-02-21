@@ -146,7 +146,7 @@ package ro.igstan.util
         
         protected function userRequiresLeapYear():Boolean
         {
-            return getMonth() === FEBRUARY && userSuppliedDay === 29;
+            return userSuppliedMonth === FEBRUARY && userSuppliedDay === 29;
         }
         
         protected function generateLeapYear():int
@@ -183,7 +183,7 @@ package ro.igstan.util
         
         protected function generateRandomMonth():int
         {
-            return getDay() > 29
+            return userSuppliedDay > 29
                  ? generateMonthOtherThanFebruary()
                  : generateMonth();
         }
@@ -240,12 +240,12 @@ package ro.igstan.util
                 throw new ArgumentError();
             }
             
-            checkMonthAndDayCompatibility(userSuppliedMonth, getMonth(), day);
+            checkMonthAndDayCompatibility(userSuppliedMonth, day);
         }
         
-        protected function checkMonthAndDayCompatibility(counterPart:int, month:int, day:int):void
+        protected function checkMonthAndDayCompatibility(month:int, day:int):void
         {
-            if (!counterPart) {
+            if (!month) {
                 return;
             }
             
@@ -265,7 +265,7 @@ package ro.igstan.util
         
         protected function checkMonthValidity(month:int):void
         {
-            checkMonthAndDayCompatibility(userSuppliedDay, month, getDay());
+            checkMonthAndDayCompatibility(month, userSuppliedDay);
         }
         
         protected function isLeapYear(year:int):Boolean
