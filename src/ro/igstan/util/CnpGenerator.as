@@ -232,22 +232,25 @@ package ro.igstan.util
         
         protected function checkMonthAndDayCompatibility(counterPart:int, month:int, day:int):void
         {
-            if (!counterPart) return;
-            
-            var dayMax:int;
-            
-            if (month === FEBRUARY) {
-                if (userSuppliedYear && !isLeapYear(getYear())) {
-                    dayMax = 28;
-                } else {
-                    dayMax = 29;
-                }
-            } else {
-                dayMax = DAYS_IN_MONTH[month];
+            if (!counterPart) {
+                return;
             }
+            
+            var dayMax:int = month === FEBRUARY
+                           ? maxDayForFebruary()
+                           : DAYS_IN_MONTH[month];
             
             if (day > dayMax) {
                 throw new ArgumentError();
+            }
+        }
+        
+        protected function maxDayForFebruary():int
+        {
+            if (userSuppliedYear && !isLeapYear(getYear())) {
+                return 28;
+            } else {
+                return 29;
             }
         }
         
