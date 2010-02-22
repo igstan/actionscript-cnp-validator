@@ -92,7 +92,7 @@ package ro.igstan.util
         
         protected function get currentDay():int
         {
-            return date.day;
+            return date.date;
         }
         
         protected function extractIntegerPair(start:int, end:int):int
