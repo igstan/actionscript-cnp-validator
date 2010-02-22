@@ -48,18 +48,8 @@ package ro.igstan.util
         }
         
         public function get age():int
-        {
-            var factor:int;
-            
-            if (currentMonth < month) {
-                factor = 1;
-            } else if (currentMonth === month && currentDay < day) {
-                factor = 1;
-            } else {
-                factor = 0;
-            }
-            
-            return currentYear - year - factor;
+        {            
+            return currentYear - year - dayAndMonthCompensationFactor;
         }
         
         public function get year():int
@@ -98,6 +88,23 @@ package ro.igstan.util
         protected function extractIntegerPair(start:int, end:int):int
         {
             return parseInt(cnp.substring(start, end), 10);
+        }
+        
+        protected function get dayAndMonthCompensationFactor():int
+        {
+            return currentMonth === month
+                 ? dayCompensationFactor
+                 : monthCompensationFactor;
+        }
+        
+        protected function get dayCompensationFactor():int
+        {
+            return currentDay < day ? 1 : 0;
+        }
+        
+        protected function get monthCompensationFactor():int
+        {
+            return currentMonth < month ? 1 : 0;
         }
     }
 }
