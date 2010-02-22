@@ -53,7 +53,7 @@ package ro.igstan.util
             
             if (currentMonth < month) {
                 factor = 1;
-            } else if (currentDay < day) {
+            } else if (currentMonth === month && currentDay < day) {
                 factor = 1;
             } else {
                 factor = 0;

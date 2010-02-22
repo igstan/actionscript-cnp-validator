@@ -44,10 +44,17 @@ package ro.igstan.util.test
         }
         
         [Test]
-        public function ageIsCalculatedWithMonthPrecision():void
+        public function ageIsCalculatedWithMonthPrecision1():void
         {
             var cnp:CNP = new CNP("2900301000000", currentDate);
             assertThat(cnp.age, equalTo(19));
+        }
+        
+        [Test]
+        public function ageIsCalculatedWithMonthPrecision2():void
+        {
+            var cnp:CNP = new CNP("2900123000000", currentDate);
+            assertThat(cnp.age, equalTo(20));
         }
         
         [Test]
