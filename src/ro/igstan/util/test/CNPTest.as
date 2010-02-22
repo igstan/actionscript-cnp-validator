@@ -71,9 +71,30 @@ package ro.igstan.util.test
         }
         
         [Test]
+        public function genderDigit3MeansPersonIsBornAfter1800AndBefore1899():void
+        {
+            var cnp:CNP = new CNP("3050313000000");
+            assertThat(cnp.year, equalTo(1805));
+        }
+        
+        [Test]
+        public function genderDigit4MeansPersonIsBornAfter1800AndBefore1899():void
+        {
+            var cnp:CNP = new CNP("4050313000000");
+            assertThat(cnp.year, equalTo(1805));
+        }
+        
+        [Test]
         public function genderDigit5MeansPersonIsBornAfter2000AndBefore2099():void
         {
             var cnp:CNP = new CNP("5050313000000");
+            assertThat(cnp.year, equalTo(2005));
+        }
+        
+        [Test]
+        public function genderDigit6MeansPersonIsBornAfter2000AndBefore2099():void
+        {
+            var cnp:CNP = new CNP("6050313000000");
             assertThat(cnp.year, equalTo(2005));
         }
     }
