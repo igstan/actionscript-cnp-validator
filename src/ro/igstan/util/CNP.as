@@ -65,19 +65,19 @@ package ro.igstan.util
         public function get year():int
         {
             var gender:String = cnp.charAt(0);
-            var shortYear:int = parseInt(cnp.substring(1, 3), 10);
+            var shortYear:int = extractIntegerPair(1, 3);
             
             return YEAR_BY_GENDER[gender] + shortYear;
         }
         
         public function get month():int
         {
-            return parseInt(cnp.substring(3, 5), 10);
+            return extractIntegerPair(3, 5);
         }
         
         public function get day():int
         {
-            return parseInt(cnp.substring(5, 7), 10);
+            return extractIntegerPair(5, 7);
         }
         
         protected function get currentYear():int
@@ -93,6 +93,11 @@ package ro.igstan.util
         protected function get currentDay():int
         {
             return date.day;
+        }
+        
+        protected function extractIntegerPair(start:int, end:int):int
+        {
+            return parseInt(cnp.substring(start, end), 10);
         }
     }
 }
