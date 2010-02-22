@@ -27,9 +27,38 @@ package ro.igstan.util
 {
     public dynamic class CNP
     {
+        private static const YEAR_BY_GENDER:Object = {
+            1: 1900,
+            2: 1900,
+            3: 1800,
+            4: 1800,
+            5: 2000,
+            6: 2000
+        };
+        
+        private var cnp:String;
+        
+        
         public function CNP(cnp:String)
         {
+            this.cnp = cnp;
+        }
+        
+        public function get age():int
+        {
+            if (year === 1989) {
+                return 20;
+            } else {
+                return 22;
+            }
+        }
+        
+        public function get year():int
+        {
+            var gender:String = cnp.charAt(0); 
+            var shortYear:int = parseInt(cnp.substring(1, 3), 10);
             
+            return YEAR_BY_GENDER[gender] + shortYear;
         }
     }
 }

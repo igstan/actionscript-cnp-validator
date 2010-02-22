@@ -33,10 +33,38 @@ package ro.igstan.util.test
     public class CNPTest
     {
         [Test]
-        public function age():void
+        public function age1():void
         {
             var cnp:CNP = new CNP("2890729028801");
             assertThat(cnp.age, equalTo(20));
+        }
+        
+        [Test]
+        public function age2():void
+        {
+            var cnp:CNP = new CNP("2870313155391");
+            assertThat(cnp.age, equalTo(22));
+        }
+        
+        [Test]
+        public function year1():void
+        {
+            var cnp:CNP = new CNP("2890729028801");
+            assertThat(cnp.year, equalTo(1989));
+        }
+        
+        [Test]
+        public function year2():void
+        {
+            var cnp:CNP = new CNP("2870313155391");
+            assertThat(cnp.year, equalTo(1987));
+        }
+        
+        [Test]
+        public function year3():void
+        {
+            var cnp:CNP = new CNP("5050313155391");
+            assertThat(cnp.year, equalTo(2005));
         }
     }
 }
