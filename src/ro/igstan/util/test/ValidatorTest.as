@@ -27,17 +27,17 @@ package ro.igstan.util.test
 {
     import org.flexunit.Assert;
     
-    import ro.igstan.util.CNPValidator;
+    import ro.igstan.util.Validator;
     
     
-    public class CNPValidatorTest
+    public class ValidatorTest
     {
-        private var cnpValidator:CNPValidator;
+        private var cnpValidator:Validator;
         
         [Before]
         public function setUp():void
         {
-            this.cnpValidator = new CNPValidator();
+            this.cnpValidator = new Validator();
         }
         
         [Test]
