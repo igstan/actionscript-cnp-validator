@@ -28,7 +28,7 @@ package ro.igstan.util
     /**
      * Implements the CNP validation algorithm from http://www.validari.ro/cnp.
      */
-    public dynamic class CnpValidator
+    public dynamic class CNPValidator
     {
         protected static const JANUARY:int   = 1;
         protected static const FEBRUARY:int  = 2;

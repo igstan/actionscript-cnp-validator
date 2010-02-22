@@ -6,11 +6,11 @@
                         creationComplete="runTests()">
     <mx:Script>
         <![CDATA[
-            import ro.igstan.util.test.CnpValidatorTest;
+            import ro.igstan.util.test.CNPValidatorTest;
 
             private var testSuite:Array = [
                 ro.igstan.util.test.CNPTest,
-                ro.igstan.util.test.CnpValidatorTest
+                ro.igstan.util.test.CNPValidatorTest
             ];
 
             private function runTests():void
