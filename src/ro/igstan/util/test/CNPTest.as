@@ -30,29 +30,29 @@ package ro.igstan.util.test
     
     import ro.igstan.util.CNP;
     
+    
     public class CNPTest
     {
+        private const currentDate:Date = new Date(2010, 01, 22);
+        
         [Test]
         public function age1():void
         {
-            var date:Date = new Date(2010, 01, 22);
-            var cnp:CNP = new CNP("2890729000000", date);
+            var cnp:CNP = new CNP("2890729000000", currentDate);
             assertThat(cnp.age, equalTo(20));
         }
         
         [Test]
         public function age2():void
         {
-            var date:Date = new Date(2010, 01, 22);
-            var cnp:CNP = new CNP("2870313000000", date);
+            var cnp:CNP = new CNP("2870313000000", currentDate);
             assertThat(cnp.age, equalTo(22));
         }
         
         [Test]
         public function age3():void
         {
-            var date:Date = new Date(2010, 01, 22);
-            var cnp:CNP = new CNP("2870223000000", date);
+            var cnp:CNP = new CNP("2870223000000", currentDate);
             assertThat(cnp.age, equalTo(22));
         }
         
