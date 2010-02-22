@@ -35,25 +35,19 @@ package ro.igstan.util.test
     {
         private const currentDate:Date = new Date(2010, 01, 22);
         
+        
         [Test]
-        public function age1():void
+        public function ageIsCalculatedWithMonthPrecision():void
         {
-            var cnp:CNP = new CNP("2890729000000", currentDate);
-            assertThat(cnp.age, equalTo(20));
+            var cnp:CNP = new CNP("2900301000000", currentDate);
+            assertThat(cnp.age, equalTo(19));
         }
         
         [Test]
-        public function age2():void
+        public function ageIsCalculatedWithDatPrecision():void
         {
-            var cnp:CNP = new CNP("2870313000000", currentDate);
-            assertThat(cnp.age, equalTo(22));
-        }
-        
-        [Test]
-        public function age3():void
-        {
-            var cnp:CNP = new CNP("2870223000000", currentDate);
-            assertThat(cnp.age, equalTo(22));
+            var cnp:CNP = new CNP("2900223000000", currentDate);
+            assertThat(cnp.age, equalTo(19));
         }
         
         [Test]
