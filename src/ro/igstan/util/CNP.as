@@ -41,10 +41,10 @@ package ro.igstan.util
         private var date:Date;
         
         
-        public function CNP(cnp:String, currentTime:Date = null)
+        public function CNP(cnp:String, referenceDate:Date = null)
         {
-            this.cnp = cnp;
-            this.date = date || new Date();
+            this.cnp  = cnp;
+            this.date = referenceDate || new Date();
         }
         
         public function get age():int
