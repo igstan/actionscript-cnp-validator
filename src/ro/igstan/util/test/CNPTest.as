@@ -44,7 +44,7 @@ package ro.igstan.util.test
         }
         
         [Test]
-        public function ageIsCalculatedWithDatPrecision():void
+        public function ageIsCalculatedWithDayPrecision():void
         {
             var cnp:CNP = new CNP("2900223000000", currentDate);
             assertThat(cnp.age, equalTo(19));
