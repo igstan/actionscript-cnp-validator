@@ -36,7 +36,7 @@ package ro.igstan.util.test
         public function age1():void
         {
             var date:Date = new Date(2010, 01, 22);
-            var cnp:CNP = new CNP("2890729028801", date);
+            var cnp:CNP = new CNP("2890729000000", date);
             assertThat(cnp.age, equalTo(20));
         }
         
@@ -57,23 +57,23 @@ package ro.igstan.util.test
         }
         
         [Test]
-        public function year1():void
+        public function genderDigit1MeansPersonIsBornAfter1900AndBefore1999():void
         {
-            var cnp:CNP = new CNP("2890729028801");
+            var cnp:CNP = new CNP("2890729000000");
             assertThat(cnp.year, equalTo(1989));
         }
         
         [Test]
-        public function year2():void
+        public function genderDigit2MeansPersonIsBornAfter1900AndBefore1999():void
         {
-            var cnp:CNP = new CNP("2870313155391");
+            var cnp:CNP = new CNP("2870313000000");
             assertThat(cnp.year, equalTo(1987));
         }
         
         [Test]
-        public function year3():void
+        public function genderDigit5MeansPersonIsBornAfter2000AndBefore2099():void
         {
-            var cnp:CNP = new CNP("5050313155391");
+            var cnp:CNP = new CNP("5050313000000");
             assertThat(cnp.year, equalTo(2005));
         }
     }
