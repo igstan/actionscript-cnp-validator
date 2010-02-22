@@ -72,6 +72,13 @@ package ro.igstan.util.test
         }
         
         [Test]
+        public function ageIsCalculatedWithDayPrecision3():void
+        {
+            var cnp:CNP = new CNP("2900222000000", currentDate);
+            assertThat(cnp.age, equalTo(20));
+        }
+        
+        [Test]
         public function genderDigit1MeansPersonIsBornAfter1900AndBefore1999():void
         {
             var cnp:CNP = new CNP("2890729000000");
