@@ -38,27 +38,41 @@ package ro.igstan.util
         
         private var cnp:String;
         
+        private var date:Date;
         
-        public function CNP(cnp:String)
+        
+        public function CNP(cnp:String, currentTime:Date = null)
         {
             this.cnp = cnp;
+            this.date = date || new Date();
         }
         
         public function get age():int
         {
-            if (year === 1989) {
-                return 20;
-            } else {
-                return 22;
-            }
+            return currentYear - year - (currentMonth < month ? 1 : 0);
         }
         
         public function get year():int
         {
-            var gender:String = cnp.charAt(0); 
+            var gender:String = cnp.charAt(0);
             var shortYear:int = parseInt(cnp.substring(1, 3), 10);
             
             return YEAR_BY_GENDER[gender] + shortYear;
+        }
+        
+        public function get month():int
+        {
+            return parseInt(cnp.substring(3, 5), 10);
+        }
+        
+        protected function get currentYear():int
+        {
+            return date.fullYear;
+        }
+        
+        protected function get currentMonth():int
+        {
+            return date.month + 1;
         }
     }
 }

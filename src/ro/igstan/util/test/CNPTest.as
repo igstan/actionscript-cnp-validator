@@ -35,14 +35,16 @@ package ro.igstan.util.test
         [Test]
         public function age1():void
         {
-            var cnp:CNP = new CNP("2890729028801");
+            var date:Date = new Date(2010, 01, 22);
+            var cnp:CNP = new CNP("2890729028801", date);
             assertThat(cnp.age, equalTo(20));
         }
         
         [Test]
         public function age2():void
         {
-            var cnp:CNP = new CNP("2870313155391");
+            var date:Date = new Date(2010, 01, 22);
+            var cnp:CNP = new CNP("2870313155391", date);
             assertThat(cnp.age, equalTo(22));
         }
         
