@@ -49,7 +49,17 @@ package ro.igstan.util
         
         public function get age():int
         {
-            return currentYear - year - (currentMonth < month ? 1 : 0);
+            var factor:int;
+            
+            if (currentMonth < month) {
+                factor = 1;
+            } else if (currentDay < day) {
+                factor = 1;
+            } else {
+                factor = 0;
+            }
+            
+            return currentYear - year - factor;
         }
         
         public function get year():int
@@ -65,6 +75,11 @@ package ro.igstan.util
             return parseInt(cnp.substring(3, 5), 10);
         }
         
+        public function get day():int
+        {
+            return parseInt(cnp.substring(5, 7), 10);
+        }
+        
         protected function get currentYear():int
         {
             return date.fullYear;
@@ -72,7 +87,12 @@ package ro.igstan.util
         
         protected function get currentMonth():int
         {
-            return date.month + 1;
+            return date.month + 1; // AS uses 0-based months
+        }
+        
+        protected function get currentDay():int
+        {
+            return date.day;
         }
     }
 }
