@@ -4,3 +4,5 @@ bin-debug
 .flexProperties
 .actionScriptProperties
 .FlexUnitSettings
+FlexUnitCompilerApplication.mxml
+FlexUnitCompilerApplication-app.xml

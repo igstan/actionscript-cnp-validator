@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<application xmlns="http://ns.adobe.com/air/application/1.5.2">
+<application xmlns="http://ns.adobe.com/air/application/1.5.3">
 
 <!-- Adobe AIR Application Descriptor File Template.
 
 	Specifies parameters for identifying, installing, and launching AIR applications.
 
-	xmlns - The Adobe AIR namespace: http://ns.adobe.com/air/application/1.5.2
+	xmlns - The Adobe AIR namespace: http://ns.adobe.com/air/application/1.5.3
 			The last segment of the namespace specifies the version 
 			of the AIR runtime required for this application to run.
 			
@@ -32,6 +32,9 @@
 
 	<!-- Copyright information. Optional -->
 	<!-- <copyright></copyright> -->
+
+	<!-- Publisher ID. Used if you're updating an application created prior to 1.5.3 -->
+	<!-- <publisherID></publisherID> -->
 
 	<!-- Settings for the application's initial window. Required. -->
 	<initialWindow>
