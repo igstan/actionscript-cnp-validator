@@ -111,7 +111,7 @@ package ro.igstan.util
         
         protected function validYear():Boolean
         {
-            return cnp.birthYear > 0 && cnp.birthYear <= 99;
+            return cnp.birthYear >= 0 && cnp.birthYear <= 99;
         }
         
         protected function validMonth():Boolean

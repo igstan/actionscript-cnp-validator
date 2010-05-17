@@ -97,5 +97,11 @@ package ro.igstan.util.test
         {
             Assert.assertTrue(cnpValidator.validates("1850401241933"));
         }
+        
+        [Test]
+        public function year2000IsAcceptedAsBirthYear():void
+        {
+            Assert.assertTrue(cnpValidator.validates("6001102410041"));
+        }
     }
 }
